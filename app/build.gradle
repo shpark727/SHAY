@@ -1,0 +1,45 @@
+//프로젝트 build.gradle 에서 안드로이드 플러그인 설정을 하고
+//모듈 build.gradle 에서 프로젝트 세부 내용을 정의한다
+
+
+/*
+    그레이들 넘어오기 전에는 minSdkVersion이나 buildToolsVersion 값을 manifest.xml 파일에 <uses-sdk> 태그속성으로 정의했지만 이건 deprecated 됐음 ㅎ
+ */
+apply plugin: 'com.android.application'
+
+
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        applicationId "com.yuanta.sunghwan.shay" //앱의 패키지명. androidManifest.xml의 패키지속성에 정의한 값보다 우선한다! 두값은 달라도됨 이게 최우선!
+        minSdkVersion 16 // 마켓에서 16보다 낮은 기기는 앱검색이 안된다
+        targetSdkVersion 25
+        versionCode 1 // 버전 업그레이드의 기준
+        versionName "1.0" // 사용자에게 배포되는 앱버전 . 보통 <major . minor . version> 형식을 취한다
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar']) //filetree의 의존성 정의. 즉 libs폴더의 .jar을 모두 참조한다.
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.2.0'   // 안드로이드 버전7부터 하위호환성을 제공한다
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:support-vector-drawable:25.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12' /* junit4.12를 다운로드하고 testCompile단계에서 참조한다
+                                         src/androidTest/java 디렉터리 또는
+                                         안드로이드 API와 직접 연관되지 않는 로컬 유닛 테스트를 위한 /src/test/java/ 디렉터리에서
+                                         참조할 수 있다 */
+}

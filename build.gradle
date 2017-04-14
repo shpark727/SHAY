@@ -1,0 +1,28 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+//buildscript 에서 안드로이드 플러그인 다운정보를 지정함 디폴트 jcenter()에서 다운로드
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.0'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+
+//최상위 프로젝트와 하위 모듈이 공통으로 사용할 내용을 지정 디폴트로 외부 라이브러리 참조시 우선jcenter를 참조한다
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+//gradle은 내장된 task외에도 사용자 정의 태스크도 만들 수 있다
+// type: Delete 부분은 새로 정의한 clean태스크가 내장 태스크인 Delete를 상속했다는 의미
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
