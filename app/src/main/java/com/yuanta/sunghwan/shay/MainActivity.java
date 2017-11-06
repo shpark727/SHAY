@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(View v) {
 
+        Log.e("hwannis", "debug");
 
         switch (v.getId()) {
             case R.id.start_btn: {
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
 
 
 
